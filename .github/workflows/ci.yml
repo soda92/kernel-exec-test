@@ -55,9 +55,7 @@ jobs:
         continue-on-error: true
         run: |
           ruby exec_rel_path_with_param.rb
-
       - name: Final Check
-        if: steps.id0.outcome != "success" || steps.id1.outcome != "success" || steps.id2.outcome != "success" || steps.id3.outcome != "success" || steps.id4.outcome != "success" || steps.id5.outcome != "success" || steps.id6.outcome != "success"
+        if: steps.id0.outcome != 'success' || steps.id1.outcome != 'success' || steps.id2.outcome != 'success' || steps.id3.outcome != 'success' || steps.id4.outcome != 'success' || steps.id5.outcome != 'success' || steps.id6.outcome != 'success'
         run: |
           exit 1
-
