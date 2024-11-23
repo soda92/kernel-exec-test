@@ -4,8 +4,8 @@ on: push
 
 jobs:
   job1:
-    name: "job1"
-    runs-on: ${{ matrix.os.value }}
+    name: "Test on ${{ matrix.os }}"
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
