@@ -20,14 +20,44 @@ jobs:
         with:
           ruby-version: "3.3.6"
 
-      - name: Run Test
+      - name: Test load_name_only.rb
+        id: id0
         continue-on-error: true
         run: |
           ruby load_name_only.rb
+      - name: Test load_rel_path.rb
+        id: id1
+        continue-on-error: true
+        run: |
           ruby load_rel_path.rb
+      - name: Test load_rel_path.rb --some-random-param
+        id: id2
+        continue-on-error: true
+        run: |
           ruby load_rel_path.rb --some-random-param
+      - name: Test exec_name_only_no_param.rb
+        id: id3
+        continue-on-error: true
+        run: |
           ruby exec_name_only_no_param.rb
+      - name: Test exec_name_only_with_param.rb
+        id: id4
+        continue-on-error: true
+        run: |
           ruby exec_name_only_with_param.rb
+      - name: Test exec_rel_path_no_param.rb
+        id: id5
+        continue-on-error: true
+        run: |
           ruby exec_rel_path_no_param.rb
+      - name: Test exec_rel_path_with_param.rb
+        id: id6
+        continue-on-error: true
+        run: |
           ruby exec_rel_path_with_param.rb
+
+      - name: Final Check
+        if: steps.id0.outcome != "success" || steps.id1.outcome != "success" || steps.id2.outcome != "success" || steps.id3.outcome != "success" || steps.id4.outcome != "success" || steps.id5.outcome != "success" || steps.id6.outcome != "success"
+        run: |
+          exit 1
 
