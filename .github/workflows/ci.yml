@@ -1,0 +1,31 @@
+name: Ruby Exec Tests
+
+on: push
+
+jobs:
+  job1:
+    name: "job1"
+    runs-on: ${{ matrix.os.value }}
+    strategy:
+      os:
+        - ubuntu-latest
+        - windows-latest
+
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - name: Setup ruby
+        uses: ruby/setup-ruby@a2bbe5b1b236842c1cb7dd11e8e3b51e0a616acc # v1.202.0
+        with:
+          ruby-version: "3.3.6"
+
+      - name: Run Test
+        continue-on-error: true
+        run: |
+          ruby load_name_only.rb
+          ruby load_rel_path.rb
+          ruby load_rel_path.rb --some-random-param
+          ruby exec_name_only_no_param.rb
+          ruby exec_name_only_with_param.rb
+          ruby exec_rel_path_no_param.rb
+          ruby exec_rel_path_with_param.rb
+
